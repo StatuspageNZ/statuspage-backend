@@ -21,6 +21,8 @@ const watercareWaterUtilityJob = async (job, done) => {
   //       "outageType": "Unplanned"
   //   },
   // ]
+
+  // note: outageType appears to be either "Unplanned" or "Planned"
   const watercareOutagesResponse = await fetch("https://api.watercare.co.nz/outages/all");
   const watercareOutages = await watercareOutagesResponse.json();
 
