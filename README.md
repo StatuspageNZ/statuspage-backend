@@ -8,12 +8,12 @@ nodejs
 # to run
 
 in root folder run
-
+```
 docker-compose up -d
 cd src
 npm install
 node index.js
-
+```
 
 # problems
 
