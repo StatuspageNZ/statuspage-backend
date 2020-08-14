@@ -6,6 +6,7 @@ const databaseClient = require('./db');
 
 const testJob = require("./jobs/testJob");
 const sparkMobileInternetJob = require("./jobs/sparkMobileInternetJob"); 
+const alertLevelJob = require("./jobs/alertLevelJob"); 
 
 // port for web server
 const port = process.env.PORT || 5000;
@@ -22,9 +23,13 @@ function createScheduledJobs() {
   testQueue.add({}, {repeat: {cron: '1 * * * * *'}});
 
 
-  const sparkMobileInternetQueue = new Queue('testQueue', redisConnection);
+  const sparkMobileInternetQueue = new Queue('sparkMobileInternetQueue', redisConnection);
   sparkMobileInternetQueue.process(sparkMobileInternetJob);
   sparkMobileInternetQueue.add({}, {repeat: {cron: '1 * * * * *'}});
+
+  const alertLevelQueue = new Queue('alertLevelQueue', redisConnection);
+  alertLevelQueue.process(alertLevelJob);
+  alertLevelQueue.add({}, {repeat: {cron: '1 * * * * *'}});
 }
 
 
