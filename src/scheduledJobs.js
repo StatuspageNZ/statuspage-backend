@@ -4,6 +4,7 @@ const testJob = require("./jobs/testJob");
 const sparkMobileInternetJob = require("./jobs/sparkMobileInternetJob"); 
 const sparkLandlineInternetJob = require("./jobs/sparkLandlineInternetJob"); 
 const alertLevelJob = require("./jobs/alertLevelJob"); 
+const watercareWaterUtilityJob = require("./jobs/watercareWaterUtilityJob"); 
 
 const redisConnection = process.env.REDIS_CONNECTION || "redis://localhost:6379";
 
@@ -15,6 +16,7 @@ function createScheduledJobs() {
   createBackgroundJob("sparkMobileInternet", sparkMobileInternetJob);
   createBackgroundJob("sparkLandlineInternet", sparkLandlineInternetJob);
   createBackgroundJob("alertLevel", alertLevelJob);
+  createBackgroundJob("watercareWaterUtility", watercareWaterUtilityJob);
 }
 
 function createBackgroundJob(jobName, jobFunction, cron = null) {
