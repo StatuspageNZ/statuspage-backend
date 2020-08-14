@@ -4,7 +4,8 @@ const hapi = require('@hapi/hapi');
 const databaseClient = require('./db');
 
 
-const testJob = require("./jobs/testJob"); 
+const testJob = require("./jobs/testJob");
+const sparkMobileInternetJob = require("./jobs/sparkMobileInternetJob"); 
 
 // port for web server
 const port = process.env.PORT || 5000;
@@ -20,6 +21,10 @@ function createScheduledJobs() {
   // every one minute add blank data to the queue to schedule the job
   testQueue.add({}, {repeat: {cron: '1 * * * * *'}});
 
+
+  const sparkMobileInternetQueue = new Queue('testQueue', redisConnection);
+  sparkMobileInternetQueue.process(sparkMobileInternetJob);
+  sparkMobileInternetQueue.add({}, {repeat: {cron: '1 * * * * *'}});
 }
 
 
