@@ -19,10 +19,10 @@ const sparkMobileInternetJob = async (job, done) => {
 
   let isOk = null;
   if (elements.length === 0) {
-    log("Outage")
+    log("Mobile internet Outage")
     isOk = false;
   } else {
-    log("OK")
+    log("Mobile internet OK")
     isOk = true;
   }
 
