@@ -2,7 +2,6 @@ const databaseClient = require('../db');
 const $ = require('cheerio')
 const rp = require('request-promise')
 
-
 const jobName = "ALERT_LEVEL_JOB";
 
 const log = (message) => console.log(jobName + ": " + message);
