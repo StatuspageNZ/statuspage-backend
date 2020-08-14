@@ -1,37 +1,11 @@
 require('dotenv').config();
-const Queue = require('bull');
+
 const hapi = require('@hapi/hapi');
 const databaseClient = require('./db');
-
-
-const testJob = require("./jobs/testJob");
-const sparkMobileInternetJob = require("./jobs/sparkMobileInternetJob"); 
-const alertLevelJob = require("./jobs/alertLevelJob"); 
+const { createScheduledJobs } = require('./scheduledJobs');
 
 // port for web server
 const port = process.env.PORT || 5000;
-// redis connection for scheduled job queue
-const redisConnection = process.env.REDIS_CONNECTION || "redis://localhost:6379";
-
-
-function createScheduledJobs() {
-  // make a queue for each background job
-  const testQueue = new Queue('testQueue', redisConnection);
-  testQueue.process(testJob);
-  // set the job to process on a cron schedule
-  // every one minute add blank data to the queue to schedule the job
-  testQueue.add({}, {repeat: {cron: '1 * * * * *'}});
-
-
-  const sparkMobileInternetQueue = new Queue('sparkMobileInternetQueue', redisConnection);
-  sparkMobileInternetQueue.process(sparkMobileInternetJob);
-  sparkMobileInternetQueue.add({}, {repeat: {cron: '1 * * * * *'}});
-
-  const alertLevelQueue = new Queue('alertLevelQueue', redisConnection);
-  alertLevelQueue.process(alertLevelJob);
-  alertLevelQueue.add({}, {repeat: {cron: '1 * * * * *'}});
-}
-
 
 async function run() {
   await databaseClient.connect();
