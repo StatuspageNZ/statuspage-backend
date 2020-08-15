@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+  node:
+    build: .
+    container_name: prod_node
+    ports:
+      - "80:5000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      - REDIS_CONNECTION=redis://redis:6379
+      - MONGODB_CONNECTION=mongodb://db:27017
+
+  db:
+    image: mongo:4.2.1
+    container_name: prod_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbdata:/data/db
+
+  redis:
+    image: redis:latest
+    container_name: prod_redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  dbdata:
