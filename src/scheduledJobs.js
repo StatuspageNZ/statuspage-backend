@@ -3,6 +3,8 @@ const Queue = require('bull');
 const testJob = require("./jobs/testJob");
 const sparkMobileInternetJob = require("./jobs/sparkMobileInternetJob"); 
 const sparkLandlineInternetJob = require("./jobs/sparkLandlineInternetJob"); 
+const vodafoneMobileJob = require("./jobs/vodafoneMobileJob");
+const vodafoneLineJob = require("./jobs/vodafoneLineJob");
 const alertLevelJob = require("./jobs/alertLevelJob"); 
 const watercareWaterUtilityJob = require("./jobs/watercareWaterUtilityJob"); 
 
@@ -15,6 +17,8 @@ function createScheduledJobs() {
   createBackgroundJob("test", testJob);
   createBackgroundJob("sparkMobileInternet", sparkMobileInternetJob);
   createBackgroundJob("sparkLandlineInternet", sparkLandlineInternetJob);
+  createBackgroundJob("vodafoneMobile", vodafoneMobileJob);
+  createBackgroundJob("vodafoneLine", vodafoneLineJob);
   createBackgroundJob("alertLevel", alertLevelJob);
   createBackgroundJob("watercareWaterUtility", watercareWaterUtilityJob);
 }
