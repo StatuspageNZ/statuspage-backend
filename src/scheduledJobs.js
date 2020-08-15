@@ -9,6 +9,7 @@ const alertLevelJob = require("./jobs/alertLevelJob");
 const watercareWaterUtilityJob = require("./jobs/watercareWaterUtilityJob"); 
 const watercareAverageDamLevelJob = require('./jobs/damLevelJob');
 const vectorPowerJob = require("./jobs/vectorPowerJob");
+const icuBedsJob = require('./jobs/icuBedsScrapper');
 
 const redisConnection = process.env.REDIS_CONNECTION || "redis://localhost:6379";
 
@@ -24,7 +25,7 @@ function createScheduledJobs() {
   createBackgroundJob("alertLevel", alertLevelJob);
   createBackgroundJob("watercareWaterUtility", watercareWaterUtilityJob);
   createBackgroundJob('watercareAveragedamLevel', watercareAverageDamLevelJob, '0 1 * * *') // Run once a day at 1pm
-
+  createBackgroundJob('icuBedsJob', icuBedsJob, '0 * * * *') // every hour
   // every 10 minutes
   createBackgroundJob("vectorPower", vectorPowerJob, "*/10 * * * *");
 }
