@@ -4,8 +4,6 @@ const hapi = require('@hapi/hapi');
 const databaseClient = require('./db');
 const { createScheduledJobs } = require('./scheduledJobs');
 
-const lawaWaterQualityJob = require('./jobs/lawaWaterQualityJob');
-
 // port for web server
 const port = process.env.PORT || 5000;
 
