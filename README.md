@@ -18,5 +18,6 @@ node index.js
 # problems
 
 if you have a local mongodb running this will not work, if your on mac run this (FOR WALT LOL)
+Screw you Will, I dont let it persist when not in use 😅(For Will)
 
 sudo service mongod stop
