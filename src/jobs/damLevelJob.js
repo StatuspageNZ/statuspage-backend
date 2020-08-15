@@ -43,5 +43,5 @@ const averageDamLevelJob = async (job, done) => {
   done();
 }
 
-averageDamLevelJob();
+averageDamLevelJob(null, () => {});
 module.exports = averageDamLevelJob;
