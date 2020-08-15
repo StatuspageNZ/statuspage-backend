@@ -46,7 +46,7 @@ async function run() {
       const icuBedsTotal = await getLatestRecordFromCollection('icu_bed');
       const alertLevelStatus = await getLatestRecordFromCollection('alert_level_status');
 
-      const 
+ 
       return {
         sparkLandline: sparkLandlineData,
         damWaterLevel,
