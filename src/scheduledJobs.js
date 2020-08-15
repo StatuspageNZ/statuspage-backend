@@ -1,6 +1,5 @@
 const Queue = require('bull');
 
-const testJob = require("./jobs/testJob");
 const sparkMobileInternetJob = require("./jobs/sparkMobileInternetJob"); 
 const sparkLandlineInternetJob = require("./jobs/sparkLandlineInternetJob"); 
 const vodafoneMobileJob = require("./jobs/vodafoneMobileJob");
@@ -18,7 +17,6 @@ const redisConnection = process.env.REDIS_CONNECTION || "redis://localhost:6379"
 const defaultCron = "1 * * * * *";
 
 function createScheduledJobs() {
-  createBackgroundJob("test", testJob);
   createBackgroundJob("sparkMobileInternet", sparkMobileInternetJob);
   createBackgroundJob("sparkLandlineInternet", sparkLandlineInternetJob);
   createBackgroundJob("vodafoneMobile", vodafoneMobileJob);
