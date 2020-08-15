@@ -7,6 +7,7 @@ const alertLevelJob = require("./jobs/alertLevelJob");
 const watercareWaterUtilityJob = require("./jobs/watercareWaterUtilityJob"); 
 const watercareAverageDamLevelJob = require('./jobs/damLevelJob');
 const vectorPowerJob = require("./jobs/vectorPowerJob");
+const lawaWaterQualityJob = require("./jobs/lawaWaterQualityJob");
 
 const redisConnection = process.env.REDIS_CONNECTION || "redis://localhost:6379";
 
@@ -23,6 +24,7 @@ function createScheduledJobs() {
 
   // every 10 minutes
   createBackgroundJob("vectorPower", vectorPowerJob, "*/10 * * * *");
+  createBackgroundJob("lawaWaterQuality", lawaWaterQualityJob, "*/10 * * * *");
 }
 
 function createBackgroundJob(jobName, jobFunction, cron = null) {
