@@ -10,16 +10,6 @@ const TOTAL_VOLUME_ALL_DAM = 95.39	 //gigalitres
 
 const averageDamLevelJob = async (job, done) => {
   log("Starting");
-
-  // const watercareOutagesResponse = await fetch("https://api.watercare.co.nz/outages/all");
-  // const watercareOutages = await watercareOutagesResponse.json();
-
-  // const numberOfOutages = watercareOutages.length;
-  // const plannedOutages = watercareOutages.filter(o => o.outageType === "Planned").length;
-  // const unplannedOutages = watercareOutages.filter(o => o.outageType === "Unplanned").length;
-
-  // log(`${numberOfOutages} outages, ${plannedOutages} planned and ${unplannedOutages} unplanned`);
-
   const lakeNamesRequest = await fetch('https://api.watercare.co.nz/lake/lakenames')
   const lakeNames = Object.keys(await lakeNamesRequest.json())
   let percentages = 0
