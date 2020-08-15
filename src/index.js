@@ -4,6 +4,8 @@ const hapi = require('@hapi/hapi');
 const databaseClient = require('./db');
 const { createScheduledJobs } = require('./scheduledJobs');
 
+const sparkLandlineDataQuery = require("./queries/sparkLandlineDataQuery");
+
 // port for web server
 const port = process.env.PORT || 5000;
 
@@ -11,7 +13,6 @@ async function run() {
   await databaseClient.connect();
 
   const db = databaseClient.db("statuspage");
-  const testCollection = db.collection("test");
 
   const server = hapi.server({
     port: port,
@@ -28,29 +29,16 @@ async function run() {
     }
   });
 
+  // jumbo controller
   server.route({
     method: 'GET',
-    path:'/test',
+    path:'/data',
     handler: async (request, h) => {
-      const testCollectionCursor = await testCollection.find({}).sort({ id: -1}).limit(1);
-      const testObjects = await testCollectionCursor.toArray();
-      return testObjects;
-    }
-  });
+      const sparkLandlineData = await sparkLandlineDataQuery();
 
-  server.route({
-    method: 'POST',
-    path:'/test',
-    handler: async (request, h) => {
-      const testPayload = request.payload.payload;
-
-      const testObject = {
-        testData: testPayload
-      }
-
-      await testCollection.insertOne(testObject);
-
-      return {success: true}
+      return {
+        sparkLandline: sparkLandlineData
+      };
     }
   });
 
