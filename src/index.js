@@ -34,7 +34,6 @@ async function run() {
     method: 'GET',
     path:'/data',
     handler: async (request, h) => {
-      const sparkLandlineData = await sparkLandlineDataQuery();
       const damWaterLevel = await getWaterCareOutage();
       const waterCareOutatage = await getLatestRecordFromCollection('watercare_water_utility_status')
       const vodaphoneMobileStatus = await getLatestRecordFromCollection('vodafone_mobile_status');
@@ -48,7 +47,6 @@ async function run() {
 
  
       return {
-        sparkLandline: sparkLandlineData,
         damWaterLevel,
         waterCareOutatage,
         vodaphoneMobileStatus,
