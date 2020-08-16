@@ -8,6 +8,7 @@ const countdownJob = require("./jobs/countdownJob");
 
 const sparkLandlineDataQuery = require("./queries/sparkLandlineDataQuery");
 const { getWaterCareOutage, getLatestRecordFromCollection } = require('./queries/waterCareQuery');
+const { getDamLevels, getLatestRecordFromCollection } = require('./queries/waterCareQuery');
 
 // port for web server
 const port = process.env.PORT || 5000;
@@ -36,7 +37,7 @@ async function run() {
     method: 'GET',
     path:'/data',
     handler: async (request, h) => {
-      const damWaterLevel = await getWaterCareOutage();
+      const damWaterLevel = await getDamLevels();
       const waterCareOutatage = await getLatestRecordFromCollection('watercare_water_utility_status')
       const vodaphoneMobileStatus = await getLatestRecordFromCollection('vodafone_mobile_status');
       const vodaphoneLineStatus = await getLatestRecordFromCollection('vodafone_line_status');
