@@ -4,8 +4,6 @@ const hapi = require('@hapi/hapi');
 const databaseClient = require('./db');
 const { createScheduledJobs } = require('./scheduledJobs');
 
-const countdownJob = require("./jobs/countdownJob");
-
 const sparkLandlineDataQuery = require("./queries/sparkLandlineDataQuery");
 const { getWaterCareOutage, getLatestRecordFromCollection } = require('./queries/waterCareQuery');
 const { getDamLevels, getLatestRecordFromCollection } = require('./queries/waterCareQuery');
@@ -71,6 +69,4 @@ async function run() {
 }
 
 run()
-//createScheduledJobs()
-
-countdownJob(null, () => true)
+createScheduledJobs()
