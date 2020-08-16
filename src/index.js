@@ -5,7 +5,6 @@ const databaseClient = require('./db');
 const { createScheduledJobs } = require('./scheduledJobs');
 
 const sparkLandlineDataQuery = require("./queries/sparkLandlineDataQuery");
-const { getWaterCareOutage, getLatestRecordFromCollection } = require('./queries/waterCareQuery');
 const { getDamLevels, getLatestRecordFromCollection } = require('./queries/waterCareQuery');
 
 // port for web server
