@@ -12,6 +12,7 @@ const lawaWaterQualityJob = require("./jobs/lawaWaterQualityJob");
 const icuBedsJob = require('./jobs/icuBedsScrapper');
 const metaweatherWeatherJob = require("./jobs/metaweatherWeatherJob");
 const quakeJob = require("./jobs/quakeJob");
+const countdownJob = require("./jobs/countdownJob");
 
 const redisConnection = process.env.REDIS_CONNECTION || "redis://localhost:6379";
 
@@ -26,6 +27,8 @@ function createScheduledJobs() {
   createBackgroundJob("alertLevel", alertLevelJob);
   createBackgroundJob("watercareWaterUtility", watercareWaterUtilityJob);
  createBackgroundJob("quakeJob", quakeJob);
+
+  createBackgroundJob("countdownJob", countdownJob);
 
   createBackgroundJob('watercareAveragedamLevel', watercareAverageDamLevelJob, '0 1 * * *') // Run once a day at 1pm
   createBackgroundJob('icuBedsJob', icuBedsJob, '0 * * * *') // every hour

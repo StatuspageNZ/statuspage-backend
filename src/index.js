@@ -4,6 +4,8 @@ const hapi = require('@hapi/hapi');
 const databaseClient = require('./db');
 const { createScheduledJobs } = require('./scheduledJobs');
 
+const countdownJob = require("./jobs/countdownJob");
+
 const sparkLandlineDataQuery = require("./queries/sparkLandlineDataQuery");
 const { getWaterCareOutage, getLatestRecordFromCollection } = require('./queries/waterCareQuery');
 
@@ -44,6 +46,7 @@ async function run() {
       const earthQuakeStaus = await getLatestRecordFromCollection('quake_status');
       const icuBedsTotal = await getLatestRecordFromCollection('icu_bed');
       const alertLevelStatus = await getLatestRecordFromCollection('alert_level_status');
+      const countdownToiletPaperStatus = await getLatestRecordFromCollection('countdown_table');
 
  
       return {
@@ -56,7 +59,8 @@ async function run() {
         sparkLandlineStatus,
         earthQuakeStaus,
         icuBedsTotal,
-        alertLevelStatus
+        alertLevelStatus,
+        countdownToiletPaperStatus
       };
     }
   });
@@ -66,4 +70,6 @@ async function run() {
 }
 
 run()
-createScheduledJobs()
+//createScheduledJobs()
+
+countdownJob(null, () => true)
